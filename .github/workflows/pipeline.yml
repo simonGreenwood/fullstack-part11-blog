@@ -7,11 +7,6 @@ on:
     branches: [master]
     types: [opened, synchronize]
 jobs:
-  hello_world_job:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Say hello
-        run: echo "Hello World!"
   main_pipeline:
     runs-on: ubuntu-20.04
     steps:
@@ -23,7 +18,8 @@ jobs:
           npm install
           cd frontend && npm install
 
-      - name: Lint
-        run: |
-          npm run lint
-          cd frontend && npm run lint
+      - name: Lint backend
+        run: npm run lint
+
+      - name: Lint frontend
+        run: cd frontend && npm run lint

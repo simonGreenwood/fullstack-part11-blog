@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 const helper = require("../utils/blog_helper")
 const Blog = require("../models/blog")
 const User = require("../models/user")
@@ -6,7 +5,6 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const supertest = require("supertest")
 const app = require("../app")
-// const { countDocuments } = require("../models/blog")
 const api = supertest(app)
 
 beforeEach(async () => {

@@ -1,8 +1,6 @@
 const blogRouter = require("express").Router()
 const Blog = require("../models/blog")
 const User = require("../models/user")
-const app = require("../app")
-const jwt = require("jsonwebtoken")
 
 blogRouter.get("/", async (request, response) => {
   const blogs = await Blog.find({}).populate("user", {
@@ -40,11 +38,6 @@ blogRouter.post("/", async (request, response) => {
     likes: likes || 0,
     user: id,
   })
-  const populatedBlog = await blog.populate("user", {
-    username: 1,
-    name: 1,
-    id: 1,
-  })
   const savedBlog = await blog.save()
 
   user.blogs = user.blogs.concat(savedBlog._id)
@@ -53,7 +46,7 @@ blogRouter.post("/", async (request, response) => {
   response.status(201).json(savedBlog.toJSON())
 })
 
-blogRouter.delete("/:id", async (request, response, next) => {
+blogRouter.delete("/:id", async (request, response) => {
   const blog = await Blog.findById(request.params.id)
   if (!blog) {
     return response.status(400).json({ error: "blog not found" })
@@ -74,7 +67,7 @@ blogRouter.delete("/:id", async (request, response, next) => {
 
 // handler of requests with result to errors
 
-blogRouter.put("/:id", async (request, response, next) => {
+blogRouter.put("/:id", async (request, response) => {
   const blog = {
     title: request.body.title,
     author: request.body.author,
@@ -96,7 +89,7 @@ blogRouter.put("/:id", async (request, response, next) => {
   }
 })
 
-blogRouter.post("/:id/comments", async (request, response, next) => {
+blogRouter.post("/:id/comments", async (request, response) => {
   const blog = await Blog.findById(request.params.id)
   const comment = request.body.comment
   if (!blog) {
