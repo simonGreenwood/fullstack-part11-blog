@@ -92,6 +92,12 @@ describe("blog tests", () => {
       .expect(401)
   })
   test("if likes is missing, default to 0", async () => {
+    const user = await User.findOne({})
+    const userForToken = {
+      username: user.username,
+      id: user._id,
+    }
+    const token = jwt.sign(userForToken, process.env.SECRET)
     const newBlog = {
       title: "test blog",
       author: "simon",
@@ -102,6 +108,7 @@ describe("blog tests", () => {
       .send(newBlog)
       .expect(201)
       .expect("Content-Type", /application\/json/)
+      .set("Authorization", `bearer ${token}`)
     const blogs = await api.get("/api/blogs")
     expect(blogs.body[blogs.body.length - 1].likes).toBe(0)
   })
@@ -174,7 +181,7 @@ describe("deletion of a blog", () => {
   })
   test("fails with status code 400 if id is invalid", async () => {
     await api.delete(`/api/blogs/invalidid`).expect(400)
-  }, 100000)
+  }, 1000)
 })
 describe("updating a blog", () => {
   test("succeeds with status code 200 if id is valid", async () => {
