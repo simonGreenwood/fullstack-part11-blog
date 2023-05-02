@@ -47,7 +47,13 @@ blogRouter.post("/", async (request, response) => {
 })
 
 blogRouter.delete("/:id", async (request, response) => {
+  try {
+    await Blog.findById(request.params.id)
+  } catch (exception) {
+    return response.status(400).json({ error: "malformatted id" })
+  }
   const blog = await Blog.findById(request.params.id)
+
   if (!blog) {
     return response.status(400).json({ error: "blog not found" })
   }

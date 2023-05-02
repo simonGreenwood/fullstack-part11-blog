@@ -31,6 +31,9 @@
     "supertest": "^6.3.1"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "frontend/src/components/Blog.test.js"
+    ]
   }
 }
