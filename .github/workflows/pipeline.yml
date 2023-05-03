@@ -26,3 +26,9 @@ jobs:
 
       - name: Test backend
         run: npm run test
+
+      - name: E2E tests
+        run: |
+          npm run test-start
+          & (cd frontend && npm start)
+          & (cd frontend && npm run test:e2e)
