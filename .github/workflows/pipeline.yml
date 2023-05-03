@@ -27,7 +27,7 @@ jobs:
       - name: Test backend
         run: npm run test
         env:
-          MONGODB_TEST_URI: ${{ secrets.TESTING_URI }}
+          TEST_MONGODB_URI: ${{ secrets.TESTING_URI }}
           SECRET: ${{ secrets.SECRET }}
 
       - name: E2E tests
