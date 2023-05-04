@@ -33,12 +33,13 @@ jobs:
           PORT: 3003
 
       - name: E2E tests
-        working-directory: frontend
         uses: cypress-io/github-action@v5
         with:
+          working-directory: ./frontend
           command: cd frontend && npm run test:e2e
           start: npm run test-start, cd frontend && npm start
         env:
           TEST_MONGODB_URI: ${{ secrets.TESTING_URI }}
           SECRET: ${{ secrets.SECRET }}
           PORT: 3003
+        # set the working directory for this step to be the frontend
