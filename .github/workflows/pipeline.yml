@@ -1,4 +1,5 @@
 name: Pipeline
+
 on:
   push:
     branches:
@@ -29,6 +30,7 @@ jobs:
         env:
           TEST_MONGODB_URI: ${{ secrets.TESTING_URI }}
           SECRET: ${{ secrets.SECRET }}
+          PORT: 3003
 
       - name: E2E tests
         run: |
