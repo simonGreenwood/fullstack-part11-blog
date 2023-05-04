@@ -33,6 +33,7 @@ jobs:
           PORT: 3003
 
       - name: E2E tests
+        working-directory: frontend
         uses: cypress-io/github-action@v5
         with:
           command: cd frontend && npm run test:e2e
