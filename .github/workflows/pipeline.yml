@@ -41,7 +41,7 @@ jobs:
           wait-on-timeout: 30
           start: |
             npm start
-            npm run test-start
+            npm run test-start --prefix ..
         env:
           TEST_MONGODB_URI: ${{ secrets.TESTING_URI }}
           SECRET: ${{ secrets.SECRET }}
