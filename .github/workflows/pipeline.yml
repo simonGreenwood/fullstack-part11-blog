@@ -45,5 +45,5 @@ jobs:
         env:
           TEST_MONGODB_URI: ${{ secrets.TESTING_URI }}
           SECRET: ${{ secrets.SECRET }}
-          PORT: 3003
+          BACKEND_PORT: 3003
         # set the working directory for this step to be the frontend
