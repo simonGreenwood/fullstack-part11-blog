@@ -36,7 +36,7 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           command: cd frontend && npm run test:e2e
-          start: npm run test-start, cd frontend && npm start
+          start: npm run test-start --prefix .., cd frontend && npm start
         env:
           TEST_MONGODB_URI: ${{ secrets.TESTING_URI }}
           SECRET: ${{ secrets.SECRET }}
