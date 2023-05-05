@@ -37,7 +37,7 @@ jobs:
         with:
           working-directory: ./frontend
           command: npm run test:e2e
-          start: npm run test-start --prefix ../, npm start
+          start: npm start
         env:
           TEST_MONGODB_URI: ${{ secrets.TESTING_URI }}
           SECRET: ${{ secrets.SECRET }}
