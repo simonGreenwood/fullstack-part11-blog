@@ -20,4 +20,7 @@ app.use("/api/users", usersRouter)
 if (process.env.NODE_ENV === "test") {
   app.use("/api/testing", testingRouter)
 }
+app.get("/health", (req, res) => {
+  res.send("ok")
+})
 module.exports = app
