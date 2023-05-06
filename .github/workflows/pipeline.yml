@@ -46,4 +46,10 @@ jobs:
           TEST_MONGODB_URI: ${{ secrets.TESTING_URI }}
           SECRET: ${{ secrets.SECRET }}
           BACKEND_PORT: 3003
+
+      - name: Deploy app
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.RENDERSERVICEID }}
+          api-key: ${{ secrets.RENDERAPIKEY }}
         # set the working directory for this step to be the frontend
