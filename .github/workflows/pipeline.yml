@@ -52,4 +52,3 @@ jobs:
         with:
           service-id: ${{ secrets.RENDERSERVICEID }}
           api-key: ${{ secrets.RENDERAPIKEY }}
-        # set the working directory for this step to be the frontend

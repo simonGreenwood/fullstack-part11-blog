@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === "test") {
   app.use("/api/testing", testingRouter)
 }
 app.get("/health", (req, res) => {
-  res.send("ok")
+  res.send("healthy")
 })
 
 module.exports = app
