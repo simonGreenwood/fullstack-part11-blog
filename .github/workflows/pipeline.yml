@@ -59,7 +59,7 @@ jobs:
         if: ${{ success() }}
         uses: rjstone/discord-webhook-notify@v1
         with:
-          severity: success
+          severity: info
           details: Job succeeded
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
