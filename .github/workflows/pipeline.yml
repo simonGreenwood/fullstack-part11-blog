@@ -1,4 +1,5 @@
 name: Pipeline
+
 on:
   push:
     branches:
@@ -7,6 +8,7 @@ on:
   pull_request:
     branches: [master]
     types: [opened, synchronize]
+
 jobs:
   main_pipeline:
     runs-on: ubuntu-20.04
@@ -27,3 +29,28 @@ jobs:
 
       - name: Test backend
         run: npm run test
+        env:
+          TEST_MONGODB_URI: ${{ secrets.TESTING_URI }}
+          SECRET: ${{ secrets.SECRET }}
+          PORT: 3003
+
+      - name: E2E tests
+        uses: cypress-io/github-action@v5
+        with:
+          working-directory: ./frontend
+          command: npm run test:e2e
+          wait-on: "http://localhost:3000, http://localhost:3003/health"
+          wait-on-timeout: 30
+          start: |
+            npm start
+            npm run test-start --prefix ..
+        env:
+          TEST_MONGODB_URI: ${{ secrets.TESTING_URI }}
+          SECRET: ${{ secrets.SECRET }}
+          BACKEND_PORT: 3003
+
+      - name: Deploy app
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY }}

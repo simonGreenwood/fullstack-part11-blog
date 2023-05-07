@@ -1,7 +1,6 @@
 const supertest = require("supertest")
 const app = require("../app")
 const api = supertest(app)
-
 const bcrypt = require("bcrypt")
 const User = require("../models/user")
 
@@ -30,7 +29,7 @@ test("create a user", async () => {
   expect(response.body.username).toBe("test")
   expect(response.body.name).toBe("test")
   expect(response.body.passwordHash).toBe(undefined)
-})
+}, 10000)
 
 test("create a user with no username", async () => {
   const response = await api

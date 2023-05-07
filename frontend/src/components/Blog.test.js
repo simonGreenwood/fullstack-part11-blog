@@ -3,6 +3,7 @@ import '@testing-library/jest-dom/extend-expect'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Blog from './Blog'
+import { Router } from 'express'
 const blog = {
   title: 'Component testing is done with react-testing-library',
   author: 'test author',
@@ -24,7 +25,11 @@ const userForBlog = {
 }
 
 test('renders content', async () => {
-  const { container } = render(<Blog startingBlog={blog} user={userForBlog} />)
+  const { container } = render(
+    <Router>
+      <Blog startingBlog={blog} user={userForBlog} />
+    </Router>
+  )
   const div = container.querySelector('.blog')
   expect(div).toHaveTextContent(
     'Component testing is done with react-testing-library test author'
@@ -32,7 +37,11 @@ test('renders content', async () => {
 })
 
 test('url and likes are displayed after button click', async () => {
-  const { container } = render(<Blog startingBlog={blog} user={userForBlog} />)
+  const { container } = render(
+    <Router>
+      <Blog startingBlog={blog} user={userForBlog} />
+    </Router>
+  )
   const div = container.querySelector('.blog')
   const user = userEvent.setup()
   const button = screen.getByText('view')
@@ -49,7 +58,9 @@ test('url and likes are displayed after button click', async () => {
 test('event handler is called twice when like button is clicked twice', async () => {
   const mockHandler = jest.fn()
   render(
-    <Blog startingBlog={blog} user={userForBlog} handleLike={mockHandler} />
+    <Router>
+      <Blog startingBlog={blog} user={userForBlog} handleLike={mockHandler} />
+    </Router>
   )
   const viewButton = screen.getByText('view')
   const user = userEvent.setup()
@@ -61,8 +72,11 @@ test('event handler is called twice when like button is clicked twice', async ()
 })
 test('event handler is called with the right props', async () => {
   const handleLike = jest.fn()
+
   render(
-    <Blog startingBlog={blog} user={userForBlog} handleLike={handleLike} />
+    <Router>
+      <Blog startingBlog={blog} user={userForBlog} handleLike={handleLike} />
+    </Router>
   )
   const viewButton = screen.getByText('view')
   const user = userEvent.setup()

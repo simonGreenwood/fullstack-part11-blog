@@ -30,6 +30,7 @@ const BlogPage = () => {
     dispatch(commentOnBlog(blog, comment))
   }
   if (!blog) return null
+  console.log(blog)
   return (
     <div>
       <Typography variant="h3">{blog.title}</Typography>
