@@ -46,14 +46,14 @@ jobs:
             npm run test-start --prefix ..
         env:
           TEST_MONGODB_URI: ${{ secrets.TESTING_URI }}
-          SECRET: ${{ secrets.SECRET }}
+          SECRET: ${{ secrets.SECRETTTT }}
           BACKEND_PORT: 3003
 
       - name: Deploy app
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
-          api-key: ${{ secrets.RENDER_APIKEY }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
 
       - name: Job succeeded
         if: ${{ success() }}
