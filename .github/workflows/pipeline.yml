@@ -15,8 +15,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
 
-      - name: DELETE THIS
-        run: echo ${{secrets.RENDERSERVICEID}} ${{secrets.RENDERAPIKEY}}}
       - name: Install dependencies for backend and frontend
         run: |
           npm install
@@ -53,5 +51,5 @@ jobs:
       - name: Deploy app
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
-          service-id: ${{ secrets.RENDERSERVICEID }}
-          api-key: ${{ secrets.RENDERAPIKEY }}
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
