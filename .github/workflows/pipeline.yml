@@ -4,12 +4,23 @@ on:
   push:
     branches:
       - master
-      - development
   pull_request:
     branches: [master]
     types: [opened, synchronize]
 
 jobs:
+  tag_release:
+    needs: [main_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' && contains( join(github.event.commits.*.message, ', '), '#skip' ) == false }}
+        uses: anothrNick/github-tag-action@8c8163ef62cf9c4677c8e800f36270af27930f42
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+
   main_pipeline:
     runs-on: ubuntu-20.04
     steps:
@@ -50,6 +61,7 @@ jobs:
           BACKEND_PORT: 3003
 
       - name: Deploy app
+        if: ${{ github.event_name == 'push' }}
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
