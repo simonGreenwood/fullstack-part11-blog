@@ -46,7 +46,7 @@ jobs:
             npm run test-start --prefix ..
         env:
           TEST_MONGODB_URI: ${{ secrets.TESTING_URI }}
-          SECRET: ${{ secrets.SECRETTTT }}
+          SECRET: ${{ secrets.SECRET }}
           BACKEND_PORT: 3003
 
       - name: Deploy app
