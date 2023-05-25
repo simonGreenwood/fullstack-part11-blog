@@ -28,16 +28,19 @@ jobs:
 
       - name: Install dependencies for backend and frontend
         run: |
-          npm install
-          cd frontend && npm install
+          cd backend && npm install
+          cd ../frontend && npm install
 
       - name: Lint backend
+        working-directory: ./backend
         run: npm run lint
 
       - name: Lint frontend
-        run: cd frontend && npm run lint
+        working-directory: ./frontend
+        run: npm run lint
 
       - name: Test backend
+        working-directory: ./backend
         run: npm run test
         env:
           TEST_MONGODB_URI: ${{ secrets.TESTING_URI }}
