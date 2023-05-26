@@ -1,5 +1,6 @@
 import axios from 'axios'
 const baseUrl = process.env.REACT_APP_BACKEND_URL + '/api/blogs'
+console.log(baseUrl, process.env)
 let token = null
 
 const setToken = (newToken) => {

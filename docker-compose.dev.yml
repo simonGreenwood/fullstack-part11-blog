@@ -11,7 +11,6 @@ services:
     ports:
       - 3000:3000
     environment:
-      - NODE_ENV=development
       - REACT_APP_BACKEND_URL=http://localhost:3003
 
   server:
@@ -23,17 +22,3 @@ services:
       - ./backend:/usr/src/app
     ports:
       - 3003:3003
-    environment:
-      - NODE_ENV=development
-      - DEV_MONGODB_URI=mongodb://root:password@mongo:27017/the_database
-  mongo:
-    image: mongo
-    ports:
-      - 27017:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-      MONGO_INITDB_DATABASE: the_database
-    volumes:
-      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
-      - ./mongo_data:/data/db
