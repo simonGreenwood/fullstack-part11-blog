@@ -11,4 +11,14 @@ services:
     ports:
       - 3000:3000
     environment:
-      - NODE_ENV=development
+      - REACT_APP_BACKEND_URL=http://localhost:3003
+
+  server:
+    image: blog-backend-dev
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./backend:/usr/src/app
+    ports:
+      - 3003:3003
