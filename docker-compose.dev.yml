@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  app:
+    image: blog-frontend-dev
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./frontend:/usr/src/app
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=development
