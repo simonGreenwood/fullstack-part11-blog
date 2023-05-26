@@ -42,7 +42,7 @@ const BlogPage = () => {
             like
           </Button>
         </div>
-        <div>added by {blog.user.name}</div>
+        <div>added by {blog.user.username}</div>
         <h3>comments</h3>
         <form onSubmit={(e) => handleComment(e)}>
           <TextField
