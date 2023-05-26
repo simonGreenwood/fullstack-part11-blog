@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  app:
+    image: blog-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/usr/src/app
+    ports:
+      - 8080:80
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:3003
+
+  server:
+    image: blog-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/usr/src/app
+    ports:
+      - 3003:3003
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://simon:simon@mongo:27017/the_database
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: the_database
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
